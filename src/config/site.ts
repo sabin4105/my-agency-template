@@ -4,7 +4,7 @@ export const siteConfig = {
   client: {
     name: "Jim Rutledge DDS",
     shortName: "Rutledge Dental",
-    archetype: "solo", // 'solo' | 'agency' | 'spa'
+    archetype: "agency", // 'solo' | 'agency' | 'spa'
   },
   theme: {
     // We will map this to Tailwind in the next step

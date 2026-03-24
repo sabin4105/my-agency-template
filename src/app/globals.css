@@ -3,3 +3,18 @@
 @import "flowbite-react/plugin/tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Jim Rutledge's Dark Blue Theme */
+  --color-primary-50: #f0f6fc;
+  --color-primary-100: #e1edf8;
+  --color-primary-200: #c9e0f2;
+  --color-primary-300: #a1cce9;
+  --color-primary-400: #72b0dd;
+  --color-primary-500: #5096d1;
+  --color-primary-600: #3b7bbd; /* The main brand color */
+  --color-primary-700: #30629b;
+  --color-primary-800: #2a5380;
+  --color-primary-900: #26456a;
+  --color-primary-950: #0f2e4a; /* Deepest shade for dark mode accents */
+}
