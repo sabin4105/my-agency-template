@@ -13,7 +13,7 @@ export function HeroSolo() {
             {badge}
           </span>
 
-          <h1 data-aos="fade-up" className="mb-4 max-w-2xl text-4xl font-extrabold leading-none tracking-tight text-gray-950 md:text-5xl dark:text-white xl:text-6xl">
+          <h1 data-aos="fade-up" className="mb-4 max-w-2xl font-serif text-4xl font-extrabold leading-none tracking-tight text-gray-950 md:text-5xl dark:text-white xl:text-6xl">
             {headline}
           </h1>
 

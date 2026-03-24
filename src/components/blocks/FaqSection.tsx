@@ -33,7 +33,7 @@ export function FaqSection() {
         <div className="text-center">
           <h2
             data-aos="fade-up"
-            className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl"
+            className="font-serif text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl"
           >
             Common Questions
           </h2>

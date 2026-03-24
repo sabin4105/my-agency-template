@@ -51,7 +51,7 @@ export function TestimonialWall() {
           <span className="inline-flex rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-primary-800 dark:bg-primary-950/70 dark:text-primary-200">
             Patient Trust
           </span>
-          <h2 data-aos="fade-up" className="mt-4 text-3xl font-bold tracking-tight text-gray-950 dark:text-white sm:text-4xl">
+          <h2 data-aos="fade-up" className="mt-4 font-serif text-3xl font-bold tracking-tight text-gray-950 dark:text-white sm:text-4xl">
             Real stories from patients who wanted their smile to feel like their best self.
           </h2>
           <p data-aos="fade-up" data-aos-delay="100" className="mt-4 text-base text-gray-600 dark:text-gray-300 sm:text-lg">

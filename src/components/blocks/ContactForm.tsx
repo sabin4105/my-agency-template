@@ -76,7 +76,7 @@ export function ContactFormBottleneckFix() {
           <form className="space-y-5">
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
-                <Label htmlFor="name" className="mb-2 block text-primary-900 dark:text-primary-100">
+                <Label htmlFor="name" className="mb-2 block">
                   Full name
                 </Label>
                 <TextInput
@@ -85,12 +85,10 @@ export function ContactFormBottleneckFix() {
                   placeholder="Jordan Smith"
                   required
                   sizing="lg"
-                  color="primary"
-                  className="border-primary-500 focus:border-primary-500 focus:ring-primary-500 dark:border-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                 />
               </div>
               <div>
-                <Label htmlFor="phone" className="mb-2 block text-primary-900 dark:text-primary-100">
+                <Label htmlFor="phone" className="mb-2 block">
                   Phone number
                 </Label>
                 <TextInput
@@ -100,14 +98,12 @@ export function ContactFormBottleneckFix() {
                   placeholder="(123) 456-7890"
                   required
                   sizing="lg"
-                  color="primary"
-                  className="border-primary-500 focus:border-primary-500 focus:ring-primary-500 dark:border-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                 />
               </div>
             </div>
 
             <div>
-              <Label htmlFor="email" className="mb-2 block text-primary-900 dark:text-primary-100">
+              <Label htmlFor="email" className="mb-2 block">
                 Email address
               </Label>
               <TextInput
@@ -117,13 +113,11 @@ export function ContactFormBottleneckFix() {
                 placeholder="you@example.com"
                 required
                 sizing="lg"
-                color="primary"
-                className="border-primary-500 focus:border-primary-500 focus:ring-primary-500 dark:border-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500"
               />
             </div>
 
             <div>
-              <Label htmlFor="message" className="mb-2 block text-primary-900 dark:text-primary-100">
+              <Label htmlFor="message" className="mb-2 block">
                 What would you like help with?
               </Label>
               <Textarea
@@ -132,8 +126,6 @@ export function ContactFormBottleneckFix() {
                 rows={6}
                 placeholder="Tell us about the treatment you are considering, any urgency, and your preferred appointment timing."
                 required
-                color="primary"
-                className="border-primary-500 focus:border-primary-500 focus:ring-primary-500 dark:border-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500"
               />
             </div>
 

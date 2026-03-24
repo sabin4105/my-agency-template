@@ -140,7 +140,7 @@ export function ServicesGrid() {
           <span className="inline-flex rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-primary-800 dark:bg-primary-950/70 dark:text-primary-200">
             Signature Services
           </span>
-          <h2 data-aos="fade-up" className="mt-4 text-3xl font-bold tracking-tight text-gray-950 dark:text-white sm:text-4xl">
+          <h2 data-aos="fade-up" className="mt-4 font-serif text-3xl font-bold tracking-tight text-gray-950 dark:text-white sm:text-4xl">
             A curated treatment menu designed for high-trust, high-touch dentistry.
           </h2>
           <p data-aos="fade-up" data-aos-delay="100" className="mt-4 text-base text-gray-600 dark:text-gray-300 sm:text-lg">
@@ -175,7 +175,7 @@ export function ServicesGrid() {
                   </div>
                 </div>
 
-                <h3 className="max-w-xs text-2xl font-semibold tracking-tight text-gray-950 dark:text-white">
+                <h3 className="max-w-xs font-serif text-2xl font-semibold tracking-tight text-gray-950 dark:text-white">
                   {service.name}
                 </h3>
                 <p className="mt-4 max-w-md text-sm leading-7 text-gray-600 dark:text-gray-300 sm:text-base">

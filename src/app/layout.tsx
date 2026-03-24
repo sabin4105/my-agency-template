@@ -1,19 +1,34 @@
 import { createTheme, ThemeModeScript } from "flowbite-react";
 import { ThemeProvider } from "flowbite-react/theme/provider";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  Inter,
+  Montserrat,
+  Playfair_Display,
+} from "next/font/google";
 import { ThemeInit } from "../../.flowbite-react/init";
 import "./globals.css";
 import { AOSInit } from "@/components/AOSInit";
 import type { CustomFlowbiteTheme } from "flowbite-react";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+});
+
+const playfairDisplay = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
 });
 
@@ -88,7 +103,7 @@ export default function RootLayout({
         <ThemeModeScript />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${montserrat.variable} ${playfairDisplay.variable} ${cormorantGaramond.variable} antialiased font-sans`}
       >
         <AOSInit />
         <ThemeInit />
