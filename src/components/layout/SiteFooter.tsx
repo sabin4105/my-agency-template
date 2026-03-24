@@ -10,6 +10,7 @@ import {
   FooterTitle,
 } from "flowbite-react";
 import { siteConfig } from "@/config/site";
+import { ContactFormBottleneckFix } from "../blocks/ContactForm";
 
 export function SiteFooter() {
   const footerColumns = Object.values(siteConfig.footerNav).filter(
@@ -17,6 +18,7 @@ export function SiteFooter() {
   );
 
   return (
+    <>
     <Footer
       container
       className="rounded-none border-t border-primary-100 bg-white transition-colors duration-300 dark:border-primary-950 dark:bg-gray-900"
@@ -73,5 +75,7 @@ export function SiteFooter() {
         </div>
       </div>
     </Footer>
+    <ContactFormBottleneckFix />
+    </>
   );
 }

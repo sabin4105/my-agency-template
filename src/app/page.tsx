@@ -15,7 +15,6 @@ export default function Home() {
         <HeroSolo />
         <TrustStrip />
         <BeforeAfterSlider />
-        <ContactFormBottleneckFix />
       </main>
       <TestimonialWall />
       <FaqSection /> {/* <-- Drops in right here */}

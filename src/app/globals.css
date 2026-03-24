@@ -55,7 +55,7 @@
 } */
 
 /* ORANGE PREMIUM */
- /* @theme {
+ @theme {
   --color-primary-50: #fff7ed;
   --color-primary-100: #ffedd5;
   --color-primary-200: #fed7aa;
@@ -67,7 +67,7 @@
   --color-primary-800: #9a3412;
   --color-primary-900: #7c2d12;
   --color-primary-950: #431407;
-} */
+}
 
 /* YELLOW PREMIUM */
  /* @theme {
@@ -160,7 +160,7 @@
 } */
 
 /* PURPLE PREMIUM */
- @theme {
+ /* @theme {
   --font-sans: var(--brand-font-sans), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--brand-font-serif), ui-serif, Georgia, serif;
   --color-primary-50: #faf5ff;
@@ -174,7 +174,7 @@
   --color-primary-800: #6b21a8;
   --color-primary-900: #581c87;
   --color-primary-950: #3b0764;
-}
+} */
 
 /* PINK PREMIUM */
  /* @theme {
