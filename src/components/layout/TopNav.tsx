@@ -34,9 +34,9 @@ export function TopNav() {
         <DarkThemeToggle className="border border-gray-200 bg-white text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800" />
         <Button
           href={siteConfig.contact.bookingLink}
-          color="dark"
+          color="primary"
           pill
-          className="hidden font-semibold sm:inline-flex dark:bg-white dark:text-black"
+          className="hidden bg-primary-600 font-semibold text-white shadow-sm shadow-primary-900/10 hover:bg-primary-700 focus:ring-primary-500 dark:bg-primary-600 dark:hover:bg-primary-700 sm:inline-flex"
         >
           Book Now
         </Button>
@@ -45,15 +45,20 @@ export function TopNav() {
 
       <NavbarCollapse>
         {navLinks.map(({ href, label }) => (
-          <NavbarLink key={href} href={href} active={href === "/"}>
+          <NavbarLink
+            key={href}
+            href={href}
+            active={href === "/"}
+            className="hover:text-primary-600 dark:hover:text-primary-400"
+          >
             {label}
           </NavbarLink>
         ))}
         <Button
           href={siteConfig.contact.bookingLink}
-          color="dark"
+          color="primary"
           pill
-          className="mt-3 w-full font-semibold sm:hidden"
+          className="mt-3 w-full bg-primary-600 font-semibold text-white hover:bg-primary-700 focus:ring-primary-500 dark:bg-primary-600 dark:hover:bg-primary-700 sm:hidden"
         >
           Book Now
         </Button>

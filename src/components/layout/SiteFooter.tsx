@@ -12,15 +12,19 @@ import {
 import { siteConfig } from "@/config/site";
 
 export function SiteFooter() {
+  const footerColumns = Object.values(siteConfig.footerNav).filter(
+    (category) => category?.links && category.links.length > 0,
+  );
+
   return (
     <Footer
       container
-      className="rounded-none border-t border-gray-100 bg-white transition-colors duration-300 dark:border-gray-800 dark:bg-gray-900"
+      className="rounded-none border-t border-primary-100 bg-white transition-colors duration-300 dark:border-primary-950 dark:bg-gray-900"
     >
       <div className="mx-auto w-full">
-        <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
+        <div className="grid w-full gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1.4fr)] lg:items-start lg:justify-between">
           <div className="mb-8 max-w-sm sm:mb-0">
-            <span className="mb-4 block text-2xl font-bold tracking-tighter text-gray-900 dark:text-white">
+            <span className="mb-4 block text-2xl font-bold tracking-tighter text-primary-900 dark:text-primary-100">
               {siteConfig.client.name}
             </span>
             <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -28,21 +32,29 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 text-left sm:mt-4 sm:grid-cols-2 sm:gap-16">
-            <div>
-              <FooterTitle title="Practice" className="text-gray-900 dark:text-white" />
+          <div className="grid grid-cols-2 gap-8 text-left sm:grid-cols-3 lg:gap-12">
+            {footerColumns.map((category) => (
+              <div key={category.title}>
+                <FooterTitle title={category.title} className="text-base font-semibold text-gray-900 dark:text-white" />
+                <FooterLinkGroup col>
+                  {category.links?.map((link) => (
+                    <FooterLink
+                      key={`${category.title}-${link.name}`}
+                      className="text-sm text-gray-500 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-300"
+                      href={link.href}
+                    >
+                      {link.name}
+                    </FooterLink>
+                  ))}
+                </FooterLinkGroup>
+              </div>
+            ))}
+
+            <div className="overflow-hidden">
+              <FooterTitle title="Contact" className="text-base font-semibold text-gray-900 dark:text-white" />
               <FooterLinkGroup col>
-                <FooterLink href="#gallery">Smile Gallery</FooterLink>
-                <FooterLink href="#services">Treatments</FooterLink>
-                <FooterLink href="#">Meet the Doctor</FooterLink>
-                <FooterLink href="#book-now">Request Appointment</FooterLink>
-              </FooterLinkGroup>
-            </div>
-            <div>
-              <FooterTitle title="Contact" className="text-gray-900 dark:text-white" />
-              <FooterLinkGroup col>
-                <FooterLink href={`tel:${siteConfig.contact.phone}`}>{siteConfig.contact.phone}</FooterLink>
-                <FooterLink href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</FooterLink>
+                <FooterLink className="text-sm text-gray-500 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-300" href={`tel:${siteConfig.contact.phone}`}>{siteConfig.contact.phone}</FooterLink>
+                <FooterLink className="text-sm text-gray-500 hover:text-primary-700 dark:text-gray-400 dark:hover:text-primary-300" href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</FooterLink>
                 <span className="text-sm text-gray-500 dark:text-gray-400 mt-2 block w-40">
                   {siteConfig.contact.address}
                 </span>
@@ -51,7 +63,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <FooterDivider className="border-gray-200 dark:border-gray-800" />
+        <FooterDivider className="border-primary-100 dark:border-primary-950" />
 
         <div className="w-full sm:flex sm:items-center sm:justify-between">
           <FooterCopyright href="#" by={siteConfig.client.name} year={new Date().getFullYear()} />

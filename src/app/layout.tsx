@@ -1,8 +1,11 @@
-import { ThemeModeScript } from "flowbite-react";
+import { createTheme, ThemeModeScript } from "flowbite-react";
+import { ThemeProvider } from "flowbite-react/theme/provider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Flowbite, CustomFlowbiteTheme } from "flowbite-react";
+import { ThemeInit } from "../../.flowbite-react/init";
 import "./globals.css";
+import { AOSInit } from "@/components/AOSInit";
+import type { CustomFlowbiteTheme } from "flowbite-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +15,61 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const customTheme: CustomFlowbiteTheme = createTheme({
+  button: {
+    base: "relative flex items-center justify-center rounded-lg text-center font-medium focus:outline-none focus:ring-4 focus:ring-primary-500",
+    color: {
+      primary:
+        "bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-500",
+    },
+    outlineColor: {
+      primary:
+        "border border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white focus:ring-primary-500 dark:border-primary-500 dark:text-primary-500 dark:hover:bg-primary-600 dark:hover:text-white dark:focus:ring-primary-500",
+    },
+  },
+  accordion: {
+    content: {
+      base: "p-5 text-sm leading-7 text-gray-600 dark:bg-gray-800 dark:text-gray-300",
+    },
+    title: {
+      base: "flex w-full items-center justify-between p-5 text-left font-medium text-gray-700 dark:text-white",
+      flush: {
+        off: "hover:bg-gray-50 focus:ring-2 focus:ring-primary-500 focus:text-primary-600 dark:hover:bg-gray-800 dark:focus:ring-primary-500 dark:focus:text-primary-500",
+        on: "bg-transparent dark:bg-transparent",
+      },
+      open: {
+        off: "",
+        on: "bg-gray-50 text-primary-600 dark:bg-gray-800 dark:text-primary-500",
+      },
+      arrow: {
+        base: "h-5 w-5 shrink-0 transition-transform",
+        open: {
+          off: "",
+          on: "rotate-180 text-primary-600 dark:text-primary-500",
+        },
+      },
+    },
+  },
+  textInput: {
+    field: {
+      input: {
+        base: "block w-full border focus:outline-none focus:ring-1 disabled:cursor-not-allowed disabled:opacity-50",
+        colors: {
+          primary:
+            "border-primary-500 bg-white text-gray-900 placeholder-gray-400 focus:border-primary-500 focus:ring-primary-500 dark:border-primary-500 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 dark:focus:border-primary-500 dark:focus:ring-primary-500",
+        },
+      },
+    },
+  },
+  textarea: {
+    base: "block w-full rounded-lg border p-2.5 text-sm focus:outline-none focus:ring-1 disabled:cursor-not-allowed disabled:opacity-50",
+    colors: {
+      primary:
+        "border-primary-500 bg-white text-gray-900 placeholder-gray-400 focus:border-primary-500 focus:ring-primary-500 dark:border-primary-500 dark:bg-gray-900 dark:text-white dark:placeholder-gray-500 dark:focus:border-primary-500 dark:focus:ring-primary-500",
+    },
+  },
 });
 
 export const metadata: Metadata = {
@@ -32,9 +90,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Flowbite theme={{ theme: CustomFlowbiteTheme }}>
+        <AOSInit />
+        <ThemeInit />
+        <ThemeProvider theme={customTheme}>
           {children}
-        </Flowbite>
+        </ThemeProvider>
       </body>
     </html>
   );
