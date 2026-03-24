@@ -19,6 +19,8 @@ export function SiteFooter() {
 
   return (
     <>
+    
+    <ContactFormBottleneckFix />
     <Footer
       container
       className="rounded-none border-t border-primary-100 bg-white transition-colors duration-300 dark:border-primary-950 dark:bg-gray-900"
@@ -75,7 +77,6 @@ export function SiteFooter() {
         </div>
       </div>
     </Footer>
-    <ContactFormBottleneckFix />
     </>
   );
 }

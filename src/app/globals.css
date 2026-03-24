@@ -55,7 +55,7 @@
 } */
 
 /* ORANGE PREMIUM */
- @theme {
+ /* @theme {
   --color-primary-50: #fff7ed;
   --color-primary-100: #ffedd5;
   --color-primary-200: #fed7aa;
@@ -67,7 +67,7 @@
   --color-primary-800: #9a3412;
   --color-primary-900: #7c2d12;
   --color-primary-950: #431407;
-}
+} */
 
 /* YELLOW PREMIUM */
  /* @theme {
@@ -85,7 +85,7 @@
 } */
 
 /* GREEN PREMIUM */
- /* @theme {
+ @theme {
   --color-primary-50: #f0fdf4;
   --color-primary-100: #dcfce7;
   --color-primary-200: #bbf7d0;
@@ -97,7 +97,7 @@
   --color-primary-800: #166534;
   --color-primary-900: #14532d;
   --color-primary-950: #052e16;
-} */
+}
 
 /* CYAN PREMIUM */
  /* @theme {
