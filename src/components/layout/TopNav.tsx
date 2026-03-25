@@ -201,10 +201,10 @@ function TopNavClassic() {
   return (
     <>
       {/* NATIVE HEADER ROOT */}
-      <header className="sticky top-0 z-50 w-full border-b border-gray-200/50 bg-white/85 backdrop-blur-md transition-colors duration-300 dark:border-gray-800/80 dark:bg-gray-950/80">
+      <header className="sticky top-0 z-50 w-full backdrop-blur-md transition-colors duration-300 dark:border-gray-800/80 dark:bg-black/80">
         {/* INNER CONTAINER */}
         {/* Added mx-auto to ensure the grid stays centered on ultrawide monitors */}
-        <nav className="mx-auto grid w-full max-w-screen-xl grid-cols-[auto_1fr_auto] items-center px-4 py-3">
+        <nav className="mx-auto grid w-full max-w-screen-xl grid-cols-[auto_1fr_auto] items-center px-4 py-3 dark:bg-stone-950">
           {/* LEFT: Logo */}
           <div className="flex items-center">
             <BrandLogo />
@@ -360,5 +360,5 @@ function TopNavMinimal() {
 // ==========================================
 // NAVBAR SWAP ENGINE (Uncomment to export)
 // ==========================================
-export function TopNav() {return <TopNavClassic />; }
-// export function TopNav() { return <TopNavMinimal />; }
+// export function TopNav() {return <TopNavClassic />; }
+export function TopNav() { return <TopNavMinimal />; }
