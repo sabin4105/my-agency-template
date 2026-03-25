@@ -15,12 +15,12 @@
   --brand-font-serif: var(--font-cormorant); */
 
   /* Luxury Medical */
-  /* --brand-font-sans: var(--font-inter);
-  --brand-font-serif: var(--font-playfair); */
+  --brand-font-sans: var(--font-inter);
+  --brand-font-serif: var(--font-playfair);
 
   /* Boutique Modern */
-  --brand-font-sans: var(--font-montserrat);
-  --brand-font-serif: var(--font-playfair);
+  /* --brand-font-sans: var(--font-montserrat);
+  --brand-font-serif: var(--font-playfair); */
 }
 
 /* premium green theme */
@@ -85,7 +85,7 @@
 } */
 
 /* GREEN PREMIUM */
- @theme {
+ /* @theme {
   --color-primary-50: #f0fdf4;
   --color-primary-100: #dcfce7;
   --color-primary-200: #bbf7d0;
@@ -97,7 +97,7 @@
   --color-primary-800: #166534;
   --color-primary-900: #14532d;
   --color-primary-950: #052e16;
-}
+} */
 
 /* CYAN PREMIUM */
  /* @theme {
@@ -115,7 +115,7 @@
 } */
 
 /* GRAY / NEUTRAL (useful fallback) */
- /* @theme {
+ @theme {
   --color-primary-50: #f9fafb;
   --color-primary-100: #f3f4f6;
   --color-primary-200: #e5e7eb;
@@ -127,7 +127,7 @@
   --color-primary-800: #1f2933;
   --color-primary-900: #111827;
   --color-primary-950: #030712;
-} */
+}
 
 /* BLUE PREMIUM */
  /* @theme {

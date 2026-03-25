@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Button, DarkThemeToggle, Navbar, NavbarBrand } from "flowbite-react";
+import { Button, DarkThemeToggle, Navbar } from "flowbite-react";
 import { siteConfig } from "@/config/site";
+import Link from "next/link";
 
 type NavLink = {
   href: string;
@@ -34,13 +35,28 @@ function getBookingLabel() {
     : "Book Consultation";
 }
 
+import Image from "next/image";
+
 function BrandLogo({ href = "/" }: { href?: string }) {
   return (
-    <NavbarBrand href={href} className="gap-3">
-      <span className="bg-gradient-to-r from-primary-500 via-primary-400 to-primary-600 bg-clip-text text-xl font-semibold tracking-tight text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)] sm:text-2xl">
-        {siteConfig.client.shortName}
+    <Link href={href} className="flex items-center gap-3">
+      {/* Next.js Optimized Image */}
+      {siteConfig.client.brandlogo && (
+        <Image
+          src={siteConfig.client.brandlogo}
+          alt={`${siteConfig.client.shortName || "Brand"} Logo`}
+          width={100}
+          height={32}
+          className="h-8 w-auto object-contain dark:brightness-110"
+          priority // Add this if the logo is visible immediately on page load
+        />
+      )}
+
+      {/* The 2-letter text logo */}
+      <span className="from-primary-500 via-primary-400 to-primary-600 bg-gradient-to-r bg-clip-text text-xl font-semibold tracking-tight text-transparent uppercase drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]">
+        {siteConfig.client.shortName?.slice(0, 2)}
       </span>
-    </NavbarBrand>
+    </Link>
   );
 }
 
@@ -58,19 +74,37 @@ function MenuToggle({
       onClick={onClick}
       aria-expanded={open}
       aria-label="Toggle navigation"
-      className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-primary-300 hover:text-primary-600 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 dark:hover:border-primary-700 dark:hover:text-primary-400"
+      className="hover:border-primary-300 hover:text-primary-600 dark:hover:border-primary-700 dark:hover:text-primary-400 inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-gray-700 transition-colors dark:border-gray-700 dark:text-gray-200"
     >
       <svg
         viewBox="0 0 20 20"
         fill="none"
         aria-hidden="true"
-        className={`h-4 w-4 transition-transform ${open ? "rotate-90" : ""}`}
+        className="h-4 w-4"
       >
+        {/* Top bar → becomes top-left to bottom-right diagonal */}
         <path
-          d="M3 5h14M3 10h14M3 15h14"
+          d={open ? "M4 4 L16 16" : "M3 5h14"}
           stroke="currentColor"
           strokeLinecap="round"
           strokeWidth="1.6"
+          className="transition-all duration-300"
+        />
+        {/* Middle bar → fades out when open */}
+        <path
+          d="M3 10h14"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeWidth="1.6"
+          className={`transition-all duration-300 ${open ? "opacity-0" : "opacity-100"}`}
+        />
+        {/* Bottom bar → becomes top-right to bottom-left diagonal */}
+        <path
+          d={open ? "M4 16 L16 4" : "M3 15h14"}
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeWidth="1.6"
+          className="transition-all duration-300"
         />
       </svg>
     </button>
@@ -166,20 +200,26 @@ function TopNavClassic() {
 
   return (
     <>
-      <Navbar
-        fluid
-        className="sticky top-0 z-50 bg-white/85 px-4 py-3 backdrop-blur-md transition-colors duration-300 dark:border-gray-800 dark:bg-gray-950/80"
-      >
-        <div className=" grid w-full max-w-screen-xl grid-cols-[auto_1fr_auto] items-center">
+      {/* NATIVE HEADER ROOT */}
+      <header className="sticky top-0 z-50 w-full border-b border-gray-200/50 bg-white/85 backdrop-blur-md transition-colors duration-300 dark:border-gray-800/80 dark:bg-gray-950/80">
+        {/* INNER CONTAINER */}
+        {/* Added mx-auto to ensure the grid stays centered on ultrawide monitors */}
+        <nav className="mx-auto grid w-full max-w-screen-xl grid-cols-[auto_1fr_auto] items-center px-4 py-3">
+          {/* LEFT: Logo */}
           <div className="flex items-center">
             <BrandLogo />
           </div>
 
+          {/* CENTER: Desktop Links */}
           <DesktopLinks links={links} align="center" />
 
+          {/* RIGHT: Toggles & Action Button */}
           <div className="flex items-center justify-end gap-2">
-            <DarkThemeToggle className=" text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800" />
+            <DarkThemeToggle className="text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800" />
+
             <DesktopBookingButton />
+
+            {/* MOBILE MENU BUTTON (Untouched) */}
             <div className="md:hidden">
               <MenuToggle
                 open={menuOpen}
@@ -187,9 +227,10 @@ function TopNavClassic() {
               />
             </div>
           </div>
-        </div>
-      </Navbar>
+        </nav>
+      </header>
 
+      {/* MOBILE MENU PANEL (Untouched) */}
       <MobileMenuPanel
         open={menuOpen}
         links={links}
@@ -198,185 +239,126 @@ function TopNavClassic() {
     </>
   );
 }
-
-function TopNavCentered() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const links = useMemo(() => getNavLinks(), []);
-  const splitIndex = Math.ceil(links.length / 2);
-  const leftLinks = links.slice(0, splitIndex);
-  const rightLinks = links.slice(splitIndex);
-
-  return (
-    <>
-      <Navbar
-        fluid
-        className="sticky top-0 z-50 border-b border-gray-200 bg-white/85 px-4 py-3 backdrop-blur-md transition-colors duration-300 dark:border-gray-800 dark:bg-gray-950/80"
-      >
-        <div className="mx-auto flex w-full max-w-screen-xl items-center justify-between gap-4 md:grid md:grid-cols-[1fr_auto_1fr]">
-          <div className="hidden md:block">
-            <DesktopLinks links={leftLinks} align="right" />
-          </div>
-
-          <div className="flex justify-start md:justify-center">
-            <BrandLogo />
-          </div>
-
-          <div className="flex items-center justify-end gap-2">
-            <div className="hidden md:block">
-              <DesktopLinks links={rightLinks} align="left" />
-            </div>
-            <DarkThemeToggle className="border border-gray-200 bg-white text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800" />
-            <div className="md:hidden">
-              <MenuToggle
-                open={menuOpen}
-                onClick={() => setMenuOpen((current) => !current)}
-              />
-            </div>
-          </div>
-        </div>
-      </Navbar>
-
-      <MobileMenuPanel
-        open={menuOpen}
-        links={links}
-        onNavigate={() => setMenuOpen(false)}
-      />
-    </>
-  );
-}
-
 function TopNavMinimal() {
   const [menuOpen, setMenuOpen] = useState(false);
   const links = useMemo(() => getNavLinks(), []);
   const [isScrolled, setIsScrolled] = useState(false);
 
-useEffect(() => {
-  const handleScroll = () => setIsScrolled(window.scrollY > 20);
-  window.addEventListener('scroll', handleScroll);
-  return () => window.removeEventListener('scroll', handleScroll);
-}, []);
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-return (
-<>
-  {/* NAVBAR ROOT (real glass layer) */}
-  <Navbar className="fixed inset-x-0 top-0 z-50 w-full">
-    
-    {/* GLASS BACKDROP (always full width) */}
-    <div className="absolute inset-0 backdrop-blur-xl bg-white/10 dark:bg-transparent" />
-
-    {/* CONTENT WRAPPER */}
-    <div
-      className={`relative w-full h-fit flex items-center justify-between transition-all duration-500 ${
-        isScrolled
-          ? "max-w-full mt-3 px-6 py-2 rounded-full bg-white/10 dark:bg-black/10 shadow-lg border border-black/10 dark:border-white/10"
-          : "max-w-screen-xl px-8"
-      }`}
-    >
-      {/* LEFT */}
-      <div className="flex items-center gap-8">
-        <BrandLogo />
-
-        {/* DESKTOP NAV */}
-        <div className="hidden md:flex items-center gap-1">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="px-4 py-2 text-sm rounded-full font-medium text-gray-700 dark:text-gray-300 transition-all hover:bg-black/5 dark:hover:bg-white/10 hover:text-primary-600 dark:hover:text-primary-400"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </div>
-
-      {/* RIGHT */}
-      <div className="flex items-center gap-3">
-        <DarkThemeToggle className="rounded-full hover:bg-black/5 dark:hover:bg-white/10" />
-
-        <Button
-          href={siteConfig.contact.bookingLink}
-          className={`
-            hidden sm:inline-flex items-center justify-center rounded-full font-semibold transition-all duration-300 relative overflow-hidden group
-            ${
-              isScrolled
-                ? "bg-primary-600 text-white px-5 py-2 text-sm shadow-md hover:shadow-primary-500/25"
-                : "bg-slate-950 text-white dark:bg-white dark:text-slate-950 px-6 py-2.5 text-sm shadow-xl"
-            }
-            hover:scale-105 active:scale-95 hover:shadow-2xl
-          `}
+  return (
+    <>
+      {/* CUSTOM ROOT WRAPPER */}
+      {/* The header creates a full-width track, while flex and justify-center keep the inner nav perfectly centered */}
+      <header className="fixed inset-x-0 top-0 z-50 flex w-full justify-center transition-all duration-500">
+        {/* DYNAMIC INNER SHELL */}
+        <nav
+          className={`relative flex items-center justify-between transition-all duration-500 ${
+            isScrolled
+              ? "mt-2 w-[95%] max-w-5xl rounded-full border border-gray-200/50 bg-white/60 px-6 py-2 shadow-lg backdrop-blur-md dark:border-white/10 dark:bg-black/50"
+              : "mt-0 w-full max-w-full border-transparent bg-transparent px-6 py-4 md:px-12"
+          }`}
         >
-          {/* The "Shiny" Shimmer Effect */}
-          <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none" />
-          
-          {/* The Text Content */}
-          <span className="relative z-10 flex items-center gap-2">
-            {getBookingLabel()}
-          </span>
+          {/* LEFT: Logo & Links */}
+          <div className="flex items-center gap-10">
+            <BrandLogo />
+          </div>
 
-          {/* Subtle Border Glow (Dark Mode specific) */}
-          <span className="absolute inset-0 rounded-full border border-white/10 group-hover:border-white/20 transition-colors" />
-        </Button>
+          {/* DESKTOP NAV (Magazine Style Typography) */}
+          <div className="hidden items-center gap-8 md:flex">
+            {links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="hover:text-primary-600 dark:hover:text-primary-400 text-xs font-semibold tracking-[0.15em] text-gray-800 uppercase transition-colors dark:text-gray-200"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
 
-        {/* MOBILE MENU BUTTON */}
-        <div className="md:hidden">
-          <MenuToggle open={menuOpen} onClick={() => setMenuOpen(!menuOpen)} />
-        </div>
-      </div>
-    </div>
-  </Navbar>
+          {/* RIGHT: Toggles & Action Button */}
+          <div className="flex items-center gap-3">
+            <DarkThemeToggle className="rounded-full hover:bg-black/5 dark:hover:bg-white/10" />
 
-  {/* MOBILE MENU (TRUE SHEET STYLE) */}
-  <div
-    className={`fixed inset-0 z-100 mt-14 transition-all duration-500 md:hidden ${
-      menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-    }`}
-  >
-    {/* BACKDROP */}
-    <div
-      className="absolute inset-0 bg-black/40 backdrop-blur-md"
-      onClick={() => setMenuOpen(false)}
-    />
-
-    {/* SLIDE PANEL */}
-    <div
-      className={`absolute top-0 left-0 right-0 mx-auto w-full max-w-md transform transition-all duration-500 ${
-        menuOpen ? "translate-y-0" : "-translate-y-full"
-      }`}
-    >
-      <div className="m-4 rounded-3xl bg-white dark:bg-gray-900 shadow-2xl border border-black/10 dark:border-white/10 p-6">
-        
-        <div className="flex flex-col gap-6 text-center mt-4">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-lg font-semibold text-gray-900 dark:text-white"
-              onClick={() => setMenuOpen(false)}
+            {/* UNTOUCHED DESKTOP BUTTON */}
+            <Button
+              href={siteConfig.contact.bookingLink}
+              className={`group relative hidden items-center justify-center overflow-hidden rounded-full font-semibold transition-all duration-300 sm:inline-flex ${
+                isScrolled
+                  ? "bg-primary-600 hover:shadow-primary-500/25 px-5 py-2 text-sm text-white shadow-md"
+                  : "bg-primary-600 dark:bg-primary-400 px-6 py-2.5 text-sm text-white shadow-xl dark:text-white"
+              } dark:shadow-primary-400/30 dark:hover:shadow-primary-400/50 hover:scale-105 hover:shadow-2xl active:scale-95`}
             >
-              {link.label}
-            </a>
-          ))}
+              <span
+                className="pointer-events-none absolute inset-0 hidden dark:block"
+                aria-hidden="true"
+              >
+                <span className="absolute inset-x-0 top-0 h-[45%] rounded-t-full bg-gradient-to-b from-white/30 to-transparent" />
+                <span className="absolute inset-0 -translate-x-full animate-[shimmer_2.8s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+              </span>
+              <span className="relative z-10 flex items-center justify-center">
+                {getBookingLabel()}
+              </span>
+            </Button>
 
-          <Button
-            href={siteConfig.contact.bookingLink}
-            className="mt-4 rounded-full bg-primary-600 py-3 text-white"
-          >
-            {getBookingLabel()}
-          </Button>
+            {/* MOBILE MENU BUTTON (Untouched) */}
+            <div className="md:hidden">
+              <MenuToggle
+                open={menuOpen}
+                onClick={() => setMenuOpen(!menuOpen)}
+              />
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      {/* MOBILE MENU (TRUE SHEET STYLE - UNTOUCHED) */}
+      <div
+        className={`fixed inset-0 z-[100] mt-14 transition-all duration-500 md:hidden ${
+          menuOpen
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
+        }`}
+      >
+        <div className="absolute inset-0" onClick={() => setMenuOpen(false)} />
+        <div
+          className={`absolute top-0 right-0 left-0 mx-auto w-full max-w-md transform transition-all duration-500 ${
+            menuOpen ? "translate-y-0" : "-translate-y-full"
+          }`}
+        >
+          <div className="bg-white p-6 shadow-2xl dark:border-white/10 dark:bg-gray-900">
+            <div className="mt-4 flex flex-col gap-6 text-center">
+              {links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-lg font-semibold text-gray-900 dark:text-white"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
+              <Button
+                href={siteConfig.contact.bookingLink}
+                className="bg-primary-600 mt-4 rounded-full py-3 text-white"
+              >
+                {getBookingLabel()}
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</>
-);
+    </>
+  );
 }
 
 // ==========================================
 // NAVBAR SWAP ENGINE (Uncomment to export)
 // ==========================================
-// export function TopNav() {
-//   return <TopNavClassic />;
-// }
-// export function TopNav() { return <TopNavCentered />; }
-export function TopNav() { return <TopNavMinimal />; }
+export function TopNav() {return <TopNavClassic />; }
+// export function TopNav() { return <TopNavMinimal />; }

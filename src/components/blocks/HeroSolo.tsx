@@ -6,14 +6,14 @@ export function HeroSolo() {
     siteConfig.hero;
 
   return (
-    <section className="relative bg-white dark:bg-gray-900 transition-colors duration-300">
+    <section className="relative bg-white dark:bg-gray-900 mt-10 sm:mt-4 transition-colors duration-300">
       <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div className="mr-auto place-self-center lg:col-span-7">
           <span className="mb-4 inline-block rounded-full bg-primary-50 px-3 py-1 text-sm font-semibold text-primary-700 ring-1 ring-primary-100 dark:bg-primary-900/30 dark:text-primary-400 dark:ring-primary-900/60">
             {badge}
           </span>
 
-          <h1 data-aos="fade-up" className="mb-4 max-w-2xl font-serif text-4xl font-extrabold leading-none tracking-tight text-gray-950 md:text-5xl dark:text-white xl:text-6xl">
+          <h1 data-aos="fade-up" className="mb-4 max-w-2xl font-serif text-3xl font-extrabold leading-none text-center sm:text-left tracking-tight text-gray-950 md:text-5xl dark:text-white">
             {headline}
           </h1>
 

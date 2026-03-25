@@ -20,6 +20,7 @@ export const siteConfig = {
     name: "Jim Rutledge DDS",
     shortName: "Rutledge Dental",
     archetype: "solo", // 'solo' | 'agency' | 'spa'
+    brandlogo: ""
   },
   theme: {
     primary: "blue",
